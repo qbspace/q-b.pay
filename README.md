@@ -108,7 +108,7 @@ q-b.pay/
 
 ## License
 
-This project is intended for personal and educational use.
+This project is licensed under the MIT License. See the LICENSE file for details.
 
 ---
 
