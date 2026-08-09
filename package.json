@@ -1,0 +1,110 @@
+{
+  "name": "glentsolution",
+  "private": true,
+  "version": "0.1.2",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qbspace/q-b.pay.git"
+  },
+  "type": "module",
+  "main": "electron/main.cjs",
+  "scripts": {
+    "dev": "concurrently -k \"npm:dev:web\" \"npm:dev:electron\"",
+    "dev:web": "vite --host 127.0.0.1 --port 5174 --strictPort",
+    "dev:electron": "wait-on tcp:5174 && cross-env VITE_DEV_SERVER_URL=http://127.0.0.1:5174 electron .",
+    "build": "tsc -b && vite build",
+    "dist": "npm run build && electron-builder",
+    "dist:win": "npm run build && electron-builder --win",
+    "publish:win": "npm run build && electron-builder --win --publish always",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "start": "electron .",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:studio": "prisma studio"
+  },
+  "imports": {
+    "#components/*": "./src/components/*.tsx",
+    "#lib/*": "./src/lib/*.ts",
+    "#hooks/*": "./src/hooks/*.ts"
+  },
+  "build": {
+    "appId": "dev.qbspace.qbpay",
+    "productName": "Q-B Pay",
+    "artifactName": "Q-B-Pay-Setup-${version}.${ext}",
+    "icon": "public/iconka.ico",
+    "directories": {
+      "output": "release-build"
+    },
+    "files": [
+      "dist/**/*",
+      "electron/**/*",
+      "package.json"
+    ],
+    "asar": true,
+    "win": {
+      "icon": "public/iconka.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "installerIcon": "public/iconka.ico",
+      "uninstallerIcon": "public/iconka.ico",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "qbspace",
+        "repo": "q-b.pay",
+        "releaseType": "release"
+      }
+    ]
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.6.0",
+    "@prisma/client": "^7.9.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "date-fns": "^4.4.0",
+    "dayjs": "^1.11.21",
+    "dexie": "^4.4.4",
+    "electron-updater": "^6.8.9",
+    "lucide-react": "^1.27.0",
+    "motion": "^12.42.2",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.1",
+    "shadcn": "^4.16.0",
+    "tailwind-merge": "^3.6.0",
+    "tw-animate-css": "^1.4.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^24.13.2",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "concurrently": "^10.0.4",
+    "cross-env": "^10.1.0",
+    "electron": "^43.2.0",
+    "electron-builder": "^26.15.3",
+    "oxlint": "^1.71.0",
+    "prisma": "^7.9.0",
+    "tailwindcss": "^4.3.3",
+    "typescript": "~6.0.2",
+    "vite": "^8.1.1",
+    "wait-on": "^9.1.0"
+  }
+}
