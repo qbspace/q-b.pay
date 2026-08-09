@@ -112,7 +112,7 @@ This project is intended for personal and educational use.
 
 ---
 
-\<p align="center">
-&#x20; \<b>q-b.pay\</b>\<br>
-&#x20; Keep your subscriptions under control.
-\</p>
+<p align="center">
+  <b>q-b.pay</b><br>
+  Keep your subscriptions under control.
+</p>
